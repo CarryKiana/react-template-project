@@ -8,7 +8,7 @@ function Nav () {
         <div className="nav-item">fourth</div>
       </div>
       <div className="nav-right">
-
+        username
       </div>
     </div>
   )
