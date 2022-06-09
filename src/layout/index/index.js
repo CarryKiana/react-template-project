@@ -1,5 +1,5 @@
 import React from "react"
-// import './index.scss'
+import './index.scss'
 function Layout (props) {
   return (
     <div className={ 'layout ' + (props.className ? props.className : '') }>
