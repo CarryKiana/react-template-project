@@ -1,9 +1,11 @@
+import React from 'react'
+import Routers from '@/routers';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      根路由入口
+      <Routers />
     </div>
   );
 }
