@@ -17,6 +17,7 @@ function RouterList () {
       <Nav />
       <Routes>
         <Route strict exact path='' element={ <First /> }></Route>
+        <Route strict exact path='/first' element={ <First /> }></Route>
         <Route strict exact path='/second' element={ <Second /> }></Route>
         <Route strict exact path='/third' element={ <Third /> }></Route>
         <Route strict exact path='/fourth' element={ <Fourth /> }></Route>
@@ -35,7 +36,7 @@ class Routers extends React.Component {
         <HandleNavigate />
         <Routes>
           {/* 通用路由 */}
-            <Route path='/' element={ <RouterList /> } ></Route> 
+            <Route path='/*' element={ <RouterList /> } ></Route> 
           {/* 权限路由 */}
           {/* 404 */}
           <Route  path="*" element={<Navigate to='/' />}></Route>
