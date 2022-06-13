@@ -9,7 +9,7 @@ function Second () {
   }
   return (
     <div onClick={ () => { handleTest() } }>
-      这是第二个路由axios 调用
+      这是第二个路由axios调用(点击,看控制台)
     </div>
   )
 }
