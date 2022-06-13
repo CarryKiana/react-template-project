@@ -49,7 +49,7 @@ service.interceptors.response.use(response => {
 }, error => {
   console.dir('interceptors err' + error) // for debug
   store.dispatch(setToken(''))
-  window.location.reload()
+  // window.location.reload()
   return Promise.reject(error)
 })
 

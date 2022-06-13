@@ -8,7 +8,7 @@ class Third extends React.Component {
   render () {
     return (
       <div>
-        这是第三个路由
+        这是第三个路由,展示类组件
       </div>
     )
   }

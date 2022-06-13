@@ -1,7 +1,15 @@
+import IndexApi from '@/api/index'
 function Second () {
+  const handleTest = () => {
+    IndexApi.test().then(res => {
+      console.log(res)
+    }).catch(err => {
+      console.log(err)
+    })
+  }
   return (
-    <div>
-      这是第二个路由，展示的是全局状态更改（有axios实例的定义，但没有调用，也没用mock，用settimeout模拟）
+    <div onClick={ () => { handleTest() } }>
+      这是第二个路由axios 调用
     </div>
   )
 }
