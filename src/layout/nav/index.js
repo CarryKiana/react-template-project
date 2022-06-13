@@ -5,7 +5,7 @@ import { setToken } from '@/stores/token'
 import { useState } from 'react'
 function Nav () {
 
-  const [hadLogin, setHadLogin] = useState(false)
+  const [hadLogin, setHadLogin] = useState(!!store.getState().token.value)
   const changeRoute = (path) => {
     emitter.emit('routeChange', path)
   }

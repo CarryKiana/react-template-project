@@ -7,9 +7,12 @@ import First from '../views/first'
 import Second from '../views/second'
 import Third from '../views/third'
 import Fourth from '../views/fourth'
+import Fifth from '../views/fifth'
 
 import Layout from '../layout/index'
 import Nav from '../layout/nav'
+
+import store from '@/stores/index'
 
 function RouterList () {
   return (
@@ -28,21 +31,58 @@ function RouterList () {
 class Routers extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      token: store.getState().token,
+      isLoading: true
+    }
+    this.unsubscribe= null
   }
+
+  componentDidMount () {
+    this.setState({
+      isLoading: false
+    })
+
+    this.unsubscribe = store.subscribe(() => {
+      if (this.state.token?.value !== store.getState()?.token?.value) {
+        this.setState({
+          token: store.getState().token
+        })
+      }
+    })
+  }
+  
+  componentWillUnmount () {
+    this.unsubscribe()
+  }
+
   render () {
-    return (
-      <Router>
-        <HandleNavigate />
-        <Routes>
-          {/* 通用路由 */}
-            <Route path='/*' element={ <RouterList /> } ></Route> 
-          {/* 权限路由 */}
-          {/* 404 */}
-          <Route  path="*" element={<Navigate to='/' />}></Route>
-        </Routes>
-      </Router>
-    )
+    if (this.state.isLoading) {
+      return <></>
+    } else {
+      return (
+        <Router>
+          <HandleNavigate />
+          { this.state.token.value }
+          <Routes>
+            {/* 通用路由 */}
+              <Route path='/*' element={ <RouterList /> } ></Route> 
+            {/* 权限路由 */}
+            {
+              this.state.token.value ?
+              (
+                <Route strict exact path='/fifth' element={ <Fifth /> }></Route>
+              )
+              : 
+              ''
+            }
+            {/* 404 */}
+            <Route  path="*" element={<Navigate to='/' />}></Route>
+          </Routes>
+        </Router>
+      )
+    }
+
   }
 }
 
