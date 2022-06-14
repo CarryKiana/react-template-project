@@ -68,3 +68,23 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+# 注意
+
+## 业务需求跟样式由具体项目决定，刨除业务代码，模板只集成一个相对完善的环境
+## 达成相同功能目的有不同的实现方式，有用则参考，无用则引以为鉴
+## 表达有不清晰的地方，见谅
+### 在不暴露react-create-app的情况下修改配置
+`yarn add react-app-rewired customize-cra`(强迫症带个-D)， 引入 react-app-rewired 跟 customize-cra，react-app-rewired用来接管指令，如package.json里改写为`react-app-rewired start`
+customize-cra用来覆盖原本的webpack配置，详见根目录config-overrides.js,这里像vue一样给文件目录加了别名
+
+### 关于路由
+react-router-dom v6移除了对location，params等的支持，也就是说，要在组件内访问此类参数必须要使用钩子useLocation，useParams，但问题是钩子函数不能再类组件里使用，也不能再高阶函数里使用，实践可行的方案如下：
+1、以组合的形式，在顶层组件下插入专门用于处理路由跳转的组件，定义见'@/components/event'，使用见`@/routers/index.js`,触发借助事件系统。注意纯函数组件开发环境下会执行多次，需要做好兼容。
+2、用纯函数组件包裹类组件传参的方式，见组件`@/views/fourth/index`
+3、路由权限有两种形式（跟vue一样）：全量渲染，导向的时候判断拦截重定向；根据权限动态渲染，匹配不到自动走默认路由。这里用的是动态渲染，因为去除业务代码可能看起来不太完善。一般思路是：
+没登录，只显示没有权限的路由
+有登录，显示对应权限的路由
+涉及异步的时候，用标识字段在render里判断渲染（生命周期并不能影响到render执行，定义为异步不能阻塞渲染，所以判断只能在render里做）
+
+### 关于全局状态
