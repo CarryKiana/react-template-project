@@ -71,9 +71,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 # 注意
 
-## 业务需求跟样式由具体项目决定，刨除业务代码，模板只集成一个相对完善的环境
-## 达成相同功能目的有不同的实现方式，有用则参考，无用则引以为鉴
-## 表达有不清晰的地方，见谅
+### 留给有缘人；业务需求跟样式由具体项目决定，刨除业务代码，模板只集成一个相对完善的环境；达成相同功能目的有不同的实现方式，有用则参考，无用则引以为鉴；表达有不清晰的地方，见谅
 ### 在不暴露react-create-app的情况下修改配置
 `yarn add react-app-rewired customize-cra`(强迫症带个-D)， 引入 react-app-rewired 跟 customize-cra，react-app-rewired用来接管指令，如package.json里改写为`react-app-rewired start`
 customize-cra用来覆盖原本的webpack配置，详见根目录config-overrides.js,这里像vue一样给文件目录加了别名
