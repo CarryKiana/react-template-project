@@ -86,3 +86,10 @@ react-router-dom v6移除了对location，params等的支持，也就是说，�
 涉及异步的时候，用标识字段在render里判断渲染（生命周期并不能影响到render执行，定义为异步不能阻塞渲染，所以判断只能在render里做）
 
 ### 关于全局状态
+redux被作者认为已经过时，并且推荐使用@reduxjs/toolkit替代，相比之下新版的少了很多样板代码，但修改状态时还是不仅要引入定义的对象，dispatch时必须传入定义时的action方法，否则无效，定义见`@/stores/token`,应用见`@/layout/nav`
+
+### 关于css预处理
+需要用node-sass就直接安装node-sass；用dirt-sass就直接安装sass。react-create-app自动对其进行处理，不用做其他配置。安装sass，原因不用说。
+
+### 关于多环境
+默认的配置不支持多个生产环境打包，故安装`dotenv-cli`,更改package.json指令如`"build:prod": "dotenv -e .env.prod react-app-rewired build"`,指令详见package.json，环境见项目根目录，其实作用就是构建或运行时，根据环境文件覆盖其环境变量
